@@ -1,0 +1,6 @@
+# Ignore everything by default
+*
+
+# Whitelist only this .gitignore and gitpumper.py
+!.gitignore
+!gitpumper.py
