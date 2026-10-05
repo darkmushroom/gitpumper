@@ -17,21 +17,31 @@ Requires **Python 3.8+** with **zero external dependencies** (uses only standard
 
 ## Authentication (for Private Repos)
 
-If accessing private repositories (or to avoid GitHub's public API rate limits), provide a GitHub token with **read-only** permissions (`Contents: Read` and `Pull requests: Read`):
+To access private repositories (including external repositories where you are a collaborator), use a **GitHub Classic Personal Access Token (PAT)** with the **`repo`** scope.
 
-### Option 1: Environment Variable (Recommended)
+> **Why Classic PAT?** Fine-grained PATs are restricted to repositories you or your own organizations administer. A Classic PAT with `repo` scope inherits your account's access to all private repositories you have permission to view.
+
+### Generating a Classic Token
+1. Go to **GitHub Settings → Developer Settings → Personal access tokens → Tokens (classic)**.
+2. Click **Generate new token (classic)**.
+3. Select the **`repo`** checkbox (Full control of private repositories).
+4. *(If applicable)* If the target repository belongs to an organization with SAML Single Sign-On (SSO), click **Configure SSO** next to your generated token and authorize the organization.
+
+### Setting the Token
+
+#### Option 1: Environment Variable (Recommended)
 ```bash
-export GITHUB_TOKEN="github_pat_..."
+export GITHUB_TOKEN="ghp_..."
 ```
 
-### Option 2: Local `.env` File
-Create a `.env` file in the project directory (it will be ignored by Git):
+#### Option 2: Local `.env` File
+Create a `.env` file in this directory (automatically ignored by Git):
 ```env
-GITHUB_TOKEN=github_pat_...
+GITHUB_TOKEN=ghp_...
 ```
 
-### Option 3: GitHub CLI
-If `gh` is installed and logged in (`gh auth login`), `gitpumper` automatically picks up the token.
+#### Option 3: GitHub CLI
+If you already use the GitHub CLI and are logged in (`gh auth login`), `gitpumper` will automatically retrieve your token via `gh auth token` if `GITHUB_TOKEN` is not set.
 
 ---
 
