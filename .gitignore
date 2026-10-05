@@ -4,3 +4,4 @@
 # Whitelist only this .gitignore and gitpumper.py
 !.gitignore
 !gitpumper.py
+!README.md
